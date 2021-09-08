@@ -16,10 +16,6 @@ class MenuController extends Controller
     {
         //
     }
-    public function show(Menu $menu)
-    {
-        //
-    }
     public function edit(Menu $menu)
     {
         //
