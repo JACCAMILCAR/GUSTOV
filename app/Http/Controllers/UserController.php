@@ -32,14 +32,27 @@ class UserController extends Controller
     }
     public function edit(User $user)
     {
-        //
+        return view('users.edit', compact('user'));
     }
     public function update(Request $request, User $user)
     {
-        //
+        //validate the fields
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255',
+            'password' => 'confirmed'
+        ]);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if($request->password != null){
+            $user->password = Hash::make($request->password);
+        }
+        $user->save();
+        return redirect('users');
     }
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect('/users');
     }
 }
