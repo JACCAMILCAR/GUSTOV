@@ -1,11 +1,10 @@
 <?php
-
 namespace App\Models;
-
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
 class Sale extends Model
 {
-    use HasFactory;
+    //relation * - *
+    public function menus(){
+        return $this->belongsToMany(Menu::class, 'menus_sales');
+    }
 }

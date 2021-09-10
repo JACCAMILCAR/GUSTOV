@@ -32,10 +32,9 @@
             <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" placeholder="Confirmar Contraseña">
         </div>
     </div>
-
     <div class="form-group pt-2">
-        <input class="btn btn-success" type="submit" value="Ok">
-        <a href="{{ url()->previous() }}" class="btn btn-success">Cancel</a>
+        <input class="btn btn-primary" type="submit" value="Ok">
+        <a href="{{ url()->previous() }}" class="btn btn-primary">Cancel</a>
     </div>
 </form>
 @endsection

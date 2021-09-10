@@ -1,49 +1,52 @@
 @extends('layouts.master')
 @section('content')
-    @if(Session::has('Message'))
-        <div class="alert alert-danger" role="alert">
-            {{   Session::get('Message')   }}
-        </div>
-    @endif
     <div class="row py-lg-2">
         <div class="col-md-6">
-            <h3>Add User</h3>
+            <h2>Make Sale</h2>
         </div>
         <div class="col-md-6">
-            <a href="/users/create" class="btn btn-primary btn-lg float-md-right" role="button" aria-pressed="true">Add New User</a>
+            <a href="/sales/create" class="btn btn-primary btn-lg float-md-right" role="button" aria-pressed="true">Make New Sale</a>
         </div>
     </div>
     <div class="card-header">
-        <h6>User List</h6>
+        <h6>Sale List</h6>
     </div>
-        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>email</th>
-                    <th>Actions</th>
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Name customer</th>
+                <th>Control code</th>
+                <th>View receipt</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Date</th>
+                <th>Name customer</th>
+                <th>Control code</th>
+                <th>View receipt</th>
+                <th>Actions</th>
+            </tr>                                            
+        </tfoot>
+        <tbody>
+            @foreach($sales as $sale)
+                <tr > 
+                    <td>{{$sale['date']}}</td>
+                    <td>{{$sale['nameCostumer']}}</td>
+                    <td>{{$sale['controlCode']}}</td>
+                    <td class="text-center">
+                        <a href="/sales/{{$sale->id}}" ><i class="fas fa-print"></i></a>
+                    </td>
+                    <td>
+                        <a href="/sales/{{ $sale['id'] }}/edit"><i class="fa fa-edit"></i></a>
+                        <a href="#" data-toggle="modal" data-target="#deleteModal" data-saleid="{{$sale['id']}}"><i class="fas fa-trash-alt"></i></a>
+                    </td>
                 </tr>
-            </thead>
-            <tfoot>
-                <tr>
-                    <th>Name</th>
-                    <th>email</th>
-                    <th>Actions</th>
-                </tr>                                            
-            </tfoot>
-            <tbody>
-                @foreach($users as $user)
-                    <tr > 
-                        <td>{{$user['name']}}</td>
-                        <td>{{$user['email']}}</td>
-                        <td>
-                            <a href="/users/{{ $user['id'] }}/edit"><i class="fa fa-edit"></i></a>
-                            <a href="#" data-toggle="modal" data-target="#deleteModal" data-userid="{{$user['id']}}"><i class="fas fa-trash-alt"></i></a>
-                        </td>
-                    </tr>
-                @endforeach                                        
-            </tbody>
-        </table>
+            @endforeach                                        
+        </tbody>
+    </table>
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -65,7 +68,7 @@
             </div>
         </div>
     </div>
-@section('js_user')
+@section('js_sale')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <script src="{{ asset('frontend') }}/dist/assets/demo/chart-area-demo.js"></script>
     <script src="{{ asset('frontend') }}/dist/assets/demo/chart-bar-demo.js"></script>
@@ -73,9 +76,9 @@
     <script>
         $('#deleteModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) 
-            var user_id = button.data('userid') 
+            var sale_id = button.data('saleid') 
             var modal = $(this)
-            modal.find('form').attr('action','/users/' + user_id);
+            modal.find('form').attr('action','/sales/' + sale_id);
         })
     </script>
 @endsection

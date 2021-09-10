@@ -64,7 +64,7 @@ body {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color:green;
+  color:black;
   text-align: left;
   background-color: #fff;
 }
@@ -159,12 +159,12 @@ sup {
 }
 
 a {
-  color: green;
+  color:rgb(50, 42, 106);
   text-decoration: none;
   background-color: transparent;
 }
 a:hover {
-  color: lime;
+  color: black;
   text-decoration: underline;
 }
 
